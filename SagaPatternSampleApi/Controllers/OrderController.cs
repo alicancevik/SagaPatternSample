@@ -7,17 +7,17 @@ namespace SagaPatternSampleApi.Controllers
     [Route("api/orders")]
     public class OrderController : ControllerBase
     {
-        private readonly OrderSaga orderSaga;
+        private readonly OrderSaga _orderSaga;
 
         public OrderController(OrderSaga orderSaga)
         {
-            this.orderSaga = orderSaga;
+            _orderSaga = orderSaga;
         }
 
         [HttpPost]
         public async Task<IActionResult> PlaceOrder(OrderPlacedEvent orderPlacedEvent)
         {
-            await orderSaga.Handle(orderPlacedEvent);
+            await _orderSaga.Handle(orderPlacedEvent);
 
             return Ok();
         }
